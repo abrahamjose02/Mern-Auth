@@ -6,10 +6,13 @@ import About from './pages/About'
 import SignUp from './pages/SignUp'
 import Profile from  './pages/Profile'
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import Header from "./components/Header"
 
 function App() {
   return (
    <Router>
+    {/* {header should be here} */}
+    <Header/>
     <Routes>
       <Route path="/" exact element={<Home/>}/>
       <Route path="/about" exact element={<About/>}/>
