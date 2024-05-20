@@ -1,6 +1,7 @@
 import { Timestamp } from "bson";
 import { timeStamp } from "console";
 import mongoose from "mongoose";
+import { type } from "os";
 import { PassThrough } from "stream";
 
 const userSchema = mongoose.Schema(
@@ -23,8 +24,12 @@ const userSchema = mongoose.Schema(
       type:Number,
       default:0
     },
+    profilePicture:{
+      type:String,
+      default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+    }
   },
-  { timeStamp: true }
+  { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
