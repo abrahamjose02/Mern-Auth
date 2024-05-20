@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { error } from "console";
 import userRoutes from './user/routes/user.route.js'
 import authRoutes from './user/routes/auth.route.js'
-import { stat } from "fs";
+
 
 dotenv.config();
 
@@ -13,8 +13,8 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
   })
-  .catch(() => {
-    console.log(error);
+  .catch((err) => {
+    console.log(err);
   });
 
 const app = express();
@@ -25,7 +25,7 @@ app.listen(3000, () => {
   console.log("Server listening on Port 3000 !");
 });
 
-app.use('/api/user',userRoutes)
+app.use('/api/user',userRoutes);
 app.use('/api/auth',authRoutes);
 
 
