@@ -1,10 +1,9 @@
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMgUP0d5N8lkuNpXaZFGuK_iyhW2J030A",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "mern-auth-fac5c.firebaseapp.com",
   projectId: "mern-auth-fac5c",
   storageBucket: "mern-auth-fac5c.appspot.com",
@@ -14,4 +13,3 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);

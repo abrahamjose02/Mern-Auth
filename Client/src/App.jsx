@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp'
 import Profile from  './pages/Profile'
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import Header from "./components/Header"
+import PrivateRoute from "./components/PrivateRoute"
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
       <Route path="/about" exact element={<About/>}/>
       <Route path="/sign-in" exact element={<SignIn/>}/>
       <Route path="/sign-up" exact element={<SignUp/>}/>
+      <Route element={<PrivateRoute/>}>
       <Route path="/profile" exact element={<Profile/>}/>
+      </Route>
     </Routes>
    </Router>
   )
