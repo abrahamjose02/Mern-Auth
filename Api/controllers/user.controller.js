@@ -1,6 +1,7 @@
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs';
 import User from "../models/user.model.js";
+import jwt from "jsonwebtoken"
 
 export const test = (req, res) => {
   res.json({
@@ -45,4 +46,8 @@ export const deleteUser = async(req,res,next)=>{
   } catch (error) {
     next(error)
   }
+}
+
+export const signout =async(req,res,next)=>{
+  res.clearCookie('access_token').status(200).json({message:'Signout Success !'});
 }

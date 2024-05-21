@@ -27,7 +27,7 @@ function SignUp() {
       });
       const data = await res.json();
       setLoading(false);
-      navigate('/')
+      navigate('/sign-in')
       if(data.success === false){
         setError(true);
         return
