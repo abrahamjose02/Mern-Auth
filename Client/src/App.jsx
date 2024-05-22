@@ -1,22 +1,42 @@
 import React from "react"
+
+import SignIn from "./pages/SignInPage"
+import Home from './pages/HomePage'
+import SignUp from './pages/SignUpPage'
+import Profile from  './pages/ProfilePage'
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import PrivateRoute from "./components/user/PrivateRoute"
-import HomePage from "./pages/HomePage"
-import SignInPage from "./pages/SignInPage"
-import SignUpPage from "./pages/SignUpPage"
-import ProfilePage from "./pages/ProfilePage"
+import PrivateRouteAdmin from './components/Admin/PrivateRouteAdmin'
+import DashboardAdminPage from "./pages/DashboardAdminPage"
+import SignInAdminPage from "./pages/SignInAdminPage"
+import CreateUser from "./components/Admin/CreateUser"
+import EditUserAdminPage from './pages/EditUserAdminPage';
+import RedirectRoute from "./components/user/RedirectRoute"
+import AdminRedirectRoute from "./components/Admin/AdminRedirectRoute"
 
 
 function App() {
   return (
    <Router>
     <Routes>
-      <Route path="/" exact element={<HomePage/>}/>
-      <Route path="/sign-in" exact element={<SignInPage/>}/>
-      <Route path="/sign-up" exact element={<SignUpPage/>}/>
+      <Route path="/" exact element={<Home/>}/>
+      <Route path="/sign-in" exact element={<RedirectRoute>
+              <SignIn />
+            </RedirectRoute>}/>
+      <Route path="/sign-up" exact element={<RedirectRoute>
+        <SignUp/>
+      </RedirectRoute>}/>
       <Route element={<PrivateRoute/>}>
-      <Route path="/profile" exact element={<ProfilePage/>}/>
+      <Route path="/profile" exact element={<Profile/>}/>
       </Route>
+      <Route path="/admin/signin" element={<AdminRedirectRoute>
+        <SignInAdminPage/>
+        </AdminRedirectRoute>}/>
+        <Route element={<PrivateRouteAdmin/>}>
+      <Route path="/admin/dashboard" element={<DashboardAdminPage/>}/>
+      </Route>
+      <Route path="/admin/createNewUser" element={<CreateUser/>}/>
+      <Route path="/admin/editUser/:userId" element={<EditUserAdminPage/>}/>
     </Routes>
    </Router>
   )

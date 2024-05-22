@@ -1,4 +1,4 @@
-import { error, profile } from "console";
+
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
@@ -16,7 +16,7 @@ export const signup = async (req, res, next) => {
     });
     await newUser.save();
     res.status(201).json({ message: "User created Successfully" });
-  } catch (err) {
+  } catch (error) {
     next(error);
   }
 };
@@ -34,7 +34,7 @@ export const signin = async (req, res, next) => {
     }
     const { password: hashedPassword, ...rest } = validUser._doc;
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-    const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+    const expiryDate = new Date(Date.now() + 36000000); // 1 hour
     res
       .cookie("access_token", token, { httpOnly: true, expires: expiryDate })
       .status(200)

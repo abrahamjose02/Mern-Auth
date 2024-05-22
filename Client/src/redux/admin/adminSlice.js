@@ -22,6 +22,18 @@ const adminSlice = createSlice({
             state.loading = false,
             state.error= action.payload
         },
+        adminUpdateStart:(state)=>{
+            state.loading= true
+        },
+        adminUpdateSuccess:(state,action)=>{
+            state.adminUser = action.payload,
+            state.loading = false,
+            state.error = false
+        },
+        adminUpdateFailure:(state,action)=>{
+            state.loading = false,
+            state.error = action.payload
+        },
         adminSignOut:(state)=>{
             state.adminUser= null,
             state.loading=false,
@@ -34,6 +46,9 @@ export const {
     adminSignInStart,
     adminSignInSuccess,
     adminSignInFailure,
+    adminUpdateStart,
+    adminUpdateSuccess,
+    adminUpdateFailure,
     adminSignOut
 } = adminSlice.actions;
 
