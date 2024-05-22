@@ -6,7 +6,7 @@ import {
   ref,
   getDownloadURL,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../../firebase";
 import {
   updateUserFailure,
   updateUserStart,
@@ -15,7 +15,7 @@ import {
   deleteUserSuccess,
   deleteUserFailure,
   signOut,
-} from "../redux/user/userSlice";
+} from "../../redux/user/userSlice";
 
 function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
