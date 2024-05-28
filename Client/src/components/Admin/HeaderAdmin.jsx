@@ -16,7 +16,7 @@ function HeaderAdmin() {
   },[adminUser,navigate])
 
  const handleSignout = async ()=>{
-  await fetch("/api/admin/signout")
+  await fetch("http://localhost:3000/api/admin/signout")
   dispatch(adminSignOut())
   navigate("/admin/signin")
  }

@@ -14,7 +14,10 @@ function DashboardAdmin() {
 
     const getAllUsers = async () => {
         try {
-            const res = await fetch("/api/admin/allUsers");
+            const res = await fetch("http://localhost:3000/api/admin/allUsers",{
+                method:'GET',
+                credentials:'include'
+            });
             const data = await res.json();
             console.log(data)
             setUsers(data);
@@ -42,8 +45,9 @@ function DashboardAdmin() {
 
     const handleDelete = async (userId) => {
         try {
-            await fetch(`/api/admin/deleteUser/${userId}`, {
+            await fetch(`http://localhost:3000/api/admin/deleteUser/${userId}`, {
                 method: "DELETE",
+                credentials:'include'
             });
             setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
         } catch (error) {

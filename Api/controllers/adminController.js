@@ -27,6 +27,7 @@ export const getAllUsers = async (req, res, next) => {
     try {
       const allUsers = await User.find({ isAdmin: 0 });
       res.status(200).json(allUsers);
+      console.log(allUsers)
     } catch (error) {
       next(error);
     }

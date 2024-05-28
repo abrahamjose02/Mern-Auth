@@ -73,11 +73,12 @@ function Profile() {
     }
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include",
         body: JSON.stringify(formData),
       });
       const data = await res.json();
@@ -95,9 +96,11 @@ function Profile() {
   const hanldeDelete = async (e) => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:3000/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
+        credentials:"include"
       });
+      
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data));
@@ -111,7 +114,7 @@ function Profile() {
 
   const handleSignOut = async () => {
     try {
-      await fetch("/api/user/signout");
+      await fetch("http://localhost:3000/api/user/signout");
       dispatch(signOut());
     } catch (error) {}
   };

@@ -11,8 +11,7 @@ import DashboardAdminPage from "./pages/DashboardAdminPage"
 import SignInAdminPage from "./pages/SignInAdminPage"
 import CreateUser from "./components/Admin/CreateUser"
 import EditUserAdminPage from './pages/EditUserAdminPage';
-import RedirectRoute from "./components/user/RedirectRoute"
-import AdminRedirectRoute from "./components/Admin/AdminRedirectRoute"
+
 
 
 function App() {
@@ -20,18 +19,12 @@ function App() {
    <Router>
     <Routes>
       <Route path="/" exact element={<Home/>}/>
-      <Route path="/sign-in" exact element={<RedirectRoute>
-              <SignIn />
-            </RedirectRoute>}/>
-      <Route path="/sign-up" exact element={<RedirectRoute>
-        <SignUp/>
-      </RedirectRoute>}/>
+      <Route path="/sign-in" exact element={<SignIn />}/>
+      <Route path="/sign-up" exact element={<SignUp/>}/>
       <Route element={<PrivateRoute/>}>
       <Route path="/profile" exact element={<Profile/>}/>
       </Route>
-      <Route path="/admin/signin" element={<AdminRedirectRoute>
-        <SignInAdminPage/>
-        </AdminRedirectRoute>}/>
+      <Route path="/admin/signin" element={<SignInAdminPage/>}/>
         <Route element={<PrivateRouteAdmin/>}>
       <Route path="/admin/dashboard" element={<DashboardAdminPage/>}/>
       </Route>

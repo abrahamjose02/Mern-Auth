@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { adminSignInFailure, adminSignInStart, adminSignInSuccess } from "../../redux/admin/adminSlice";
@@ -7,7 +7,7 @@ import { adminSignInFailure, adminSignInStart, adminSignInSuccess } from "../../
 function SignInAdmin() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState();
-  const {loading,error} = useSelector((state)=>state.user)
+  const {loading,error,adminUser} = useSelector((state)=>state.user)
   const handleChange = (e) => {
     setErrorMessage("")
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -15,6 +15,12 @@ function SignInAdmin() {
 
 
   console.log(formData);
+
+  // useEffect(()=>{
+  //   if(adminUser){
+  //     navigate('/admin/dashboard')
+  //   }
+  // },[adminUser,navigate])
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -28,11 +34,12 @@ function SignInAdmin() {
     try {
         dispatch(adminSignInStart())
     
-      const res = await fetch("/api/admin/signin", {
+      const res = await fetch("http://localhost:3000/api/admin/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include",
         body: JSON.stringify(formData),
       });
       const data = await res.json();

@@ -1,10 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { error } from "console";
 import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
 import cookieParser from "cookie-parser";
+import cors from 'cors'
 
 import adminRouter from "./routes/AdminRoute.js";
 
@@ -25,6 +25,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors({
+  origin:'http://localhost:5173',
+  credentials:true
+}))
 
 
 app.listen(3000, () => {

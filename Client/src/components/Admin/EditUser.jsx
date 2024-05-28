@@ -15,7 +15,10 @@ function EditUser() {
 
 
     const getUser=async()=>{
-        const res = await fetch(`/api/admin/getUser/${userId}`)
+        const res = await fetch(`http://localhost:3000/api/admin/getUser/${userId}`,{
+          method:'GET',
+          credentials:'include'
+        })
         const data =await res.json()
         
         setUser(data)
@@ -28,11 +31,12 @@ function EditUser() {
     const handleUpdate = async (e)=>{
         e.preventDefault()
         try {
-          const res = await fetch(`/api/admin/updateUser/${userId}`,{
+          const res = await fetch(`http://localhost:3000/api/admin/updateUser/${userId}`,{
               method:"POST",
               headers:{
                   "Content-Type": "application/json"
               },
+              credentials:'include',
               body:JSON.stringify(formData)
           })
           const data = await res.json()
