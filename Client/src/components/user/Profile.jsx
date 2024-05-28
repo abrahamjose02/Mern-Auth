@@ -74,7 +74,7 @@ function Profile() {
     try {
       dispatch(updateUserStart());
       const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },

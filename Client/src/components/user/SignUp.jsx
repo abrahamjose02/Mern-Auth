@@ -15,14 +15,14 @@ function SignUp() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {currentUser} = useSelector(state=>state.user)
+  const { currentUser } = useSelector(state => state.user);
   
-  useEffect(()=>{
-    dispatch(setErrorToNull())
-    if(currentUser){
-      navigate('/profile')
+  useEffect(() => {
+    dispatch(setErrorToNull());
+    if (currentUser) {
+      navigate('/profile');
     }
-  },[currentUser,navigate])
+  }, [currentUser, navigate, dispatch]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -30,17 +30,28 @@ function SignUp() {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.username) newErrors.username = "Username is required";
+    if (!formData.username) {
+      newErrors.username = "Username is required";
+    } else if (formData.username.startsWith(' ')) {
+      newErrors.username = "Username cannot start with a space";
+    }
+
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
+    } else if (formData.email.startsWith(' ')) {
+      newErrors.email = "Email cannot start with a space";
     }
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
+    } else if (formData.password.startsWith(' ')) {
+      newErrors.password = "Password cannot start with a space";
     }
+
     return newErrors;
   };
 
@@ -60,7 +71,7 @@ function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials:"include",
+        credentials: "include",
         body: JSON.stringify(formData),
       });
       const data = await res.json();
@@ -71,6 +82,7 @@ function SignUp() {
       }
       navigate('/sign-in');
     } catch (error) {
+      console.error("Error: ", error);
       setLoading(false);
       setError(true);
     }
